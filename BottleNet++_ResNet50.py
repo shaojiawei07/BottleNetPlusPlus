@@ -82,7 +82,7 @@ class BottleNetPlusPlus_ResNet(nn.Module):
             x = self.resnet_model(x)
             return x
         
-        if self.div_position == 5:
+        if self.div_position == 1:
             for i in range(len(list(self.resnet_model.conv1x))):
                 #print(layer)
                 x = list(self.resnet_model.conv1)[i](x)
@@ -91,7 +91,7 @@ class BottleNetPlusPlus_ResNet(nn.Module):
         else:
             x = self.resnet_model.conv1(x)
         
-        if self.div_position == 4:
+        if self.div_position == 2:
             for i in range(len(list(self.resnet_model.conv2_x))):
                 #print(layer)
                 x = list(self.resnet_model.conv2_x)[i](x)
@@ -111,7 +111,7 @@ class BottleNetPlusPlus_ResNet(nn.Module):
             x = self.resnet_model.conv3_x(x)
         
         
-        if self.div_position == 2:
+        if self.div_position == 4:
             for i in range(len(list(self.resnet_model.conv4_x))):
                 #print(layer)
                 x = list(self.resnet_model.conv4_x)[i](x)
@@ -121,7 +121,7 @@ class BottleNetPlusPlus_ResNet(nn.Module):
             x = self.resnet_model.conv4_x(x)
        
 
-        if self.div_position == 1:
+        if self.div_position == 5:
             for i in range(len(list(self.resnet_model.conv5_x))):
                 #print(layer)
                 x = list(self.resnet_model.conv5_x)[i](x)
