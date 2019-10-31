@@ -1,25 +1,12 @@
-"""resnet in pytorch
-
-
-
-[1] Kaiming He, Xiangyu Zhang, Shaoqing Ren, Jian Sun.
-
-    Deep Residual Learning for Image Recognition
-    https://arxiv.org/abs/1512.03385v1
-"""
-
 import torch
 import torch.nn as nn
 
 class BasicBlock(nn.Module):
-    """Basic Block for resnet 18 and resnet 34
+    """Basic Block for resnet
 
     """
 
-    #BasicBlock and BottleNeck block 
-    #have different output size
-    #we use class attribute expansion
-    #to distinct
+
     expansion = 1
 
     def __init__(self, in_channels, out_channels, stride=1):
