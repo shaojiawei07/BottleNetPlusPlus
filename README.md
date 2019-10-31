@@ -12,7 +12,7 @@ We use a pair of CNNs as encoder and decoder. The communication channel is prese
 
 ![avatar](./encoder_and_decoder.png)
 
-##Implementation
+## Implementation
 
 We use Pytorch to realize the whole model. For convenient, both ResNet50 and VGG16 are pre-trained and reach 77.81% and 74.04% accuracy, respectively.
 
