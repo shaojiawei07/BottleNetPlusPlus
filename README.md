@@ -31,7 +31,7 @@ CIFAR-100
 ```
 ### How to Run
 
-`BottleNet++ResNet50.py` and `BottleNet++VGG16.py` use `-div_position` and `-sub_div_position` to control the splitting position (`-sub_div_position` is not be used in VGG16).
+`BottleNet++ResNet50.py` and `BottleNet++VGG16.py` use `-div_position` and `-sub_div_position` to control the splitting position (`-sub_div_position` is not used in VGG16).
 
 `-in_dim` means the input dimension of encoder and `-hid_dim` is the encoded channel dimension. `-spatial` controls the spatial shrink.
 
