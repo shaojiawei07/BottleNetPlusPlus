@@ -55,7 +55,6 @@ class BottleNetPlusPlus_ResNet(nn.Module):
         super(BottleNetPlusPlus_ResNet, self).__init__()
         self.resnet_model = torch.load('resnet50_0.7781.pkl')
 
-        i=0
         self.div_position = args.div_position
 
 
