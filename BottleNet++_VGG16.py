@@ -49,8 +49,6 @@ test_loader_this = torch.utils.data.DataLoader(test_set_this,
         batch_size=batch_size, shuffle=False,
         num_workers=4, pin_memory=True)
         
-
-# VAE model
 class BottleNetPlusPlus_VGG(nn.Module):
     def __init__(self,input_channel = args.in_dim, hidden_channel = args.hid_dim, noise = args.noise, channel = args.channel,div_position = args.div_position,spatial =args.spatial):
         super(BottleNetPlusPlus_VGG, self).__init__()
@@ -71,7 +69,6 @@ class BottleNetPlusPlus_VGG(nn.Module):
 
         self.compression_module = compression_module(input_channel = input_channel , hidden_channel = hidden_channel,noise = noise,channel = channel, spatial = spatial)
         
-
 
     
     def forward(self, x):
