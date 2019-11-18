@@ -55,7 +55,6 @@ class BottleNetPlusPlus_VGG(nn.Module):
 
         self.vgg_model = torch.load('vgg16_74.02.pth')
         self.vgg_model.features = self.vgg_model.features.module
-        i=0
         self.div_position = args.div_position
 
 
