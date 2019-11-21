@@ -65,9 +65,6 @@ class BottleNetPlusPlus_ResNet(nn.Module):
                 para.requires_grad = True
 
         self.compression_module = compression_module(input_channel = input_channel , hidden_channel = hidden_channel,noise = noise,channel = channel, spatial = spatial)
-        #self.compression_module = torch.load('vae_cifar10_version2.pkl')
-
-
     
     def forward(self, x):
 
@@ -157,23 +154,12 @@ def train(model=model):
         
         
         for i, (x, y) in enumerate(data_loader):
-        
-            if (i+epoch)==0:
-                print('load model')
-                #model.load_state_dict(torch.load('vgg_cifar10_vae_simple_static.pth'))
-                #model.load_state_dict(torch.load('vgg_cifar10_vae_simple_static_189.pth'))
-                
+                                  
             x = x.to(device)
             y = y.to(device)
 
             model.train()
-            #print(x.size())
             output = model(x)
-            
-            #reconst_loss_f = torch.nn.MSELoss(reduce=True,size_average=False)
-            #reconst_loss = reconst_loss_f(x_reconst,x)
-            
-            #kl_div = - 0.5 * torch.sum(1 + log_var - mu.pow(2) - log_var.exp())
             
             # Backprop and optimize
             criterion = nn.CrossEntropyLoss()
@@ -181,7 +167,6 @@ def train(model=model):
             #print(output.size(),y.size())
             loss = criterion(output, y)
             
-
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
@@ -238,6 +223,5 @@ def adjust_learning_rate(optimizer, epoch):
 
       
 if __name__=='__main__':
-    #pass
     train()
     #test()
