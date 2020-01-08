@@ -44,7 +44,7 @@ CIFAR-100
 #### 256x bit compression ratio
 
 ```
-python BottleNet++_ResNet50.py -in_dim 2048 -hid_dim 32 -div_position 5 -sub_div_position 2 -channel e -noise 0.01
+python BottleNet++_ResNet50.py -in_dim 2048 -hid_dim 32 -div_position 1 -sub_div_position 2 -channel e -noise 0.01
 ```
 ```
 python BottleNet++_VGG16.py -in_dim 512 -hid_dim 8 -div_position 13 -channel e -noise 0.01
