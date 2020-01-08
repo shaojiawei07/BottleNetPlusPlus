@@ -73,7 +73,7 @@ class BottleNetPlusPlus_ResNet(nn.Module):
             return x
         
         if self.div_position == 1:
-            for i in range(len(list(self.resnet_model.conv1x))):
+            for i in range(len(list(self.resnet_model.conv1_x))):
                 #print(layer)
                 x = list(self.resnet_model.conv1)[i](x)
                 if i == args.sub_div_position:
