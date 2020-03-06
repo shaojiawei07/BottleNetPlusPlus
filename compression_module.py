@@ -10,7 +10,43 @@ import numpy as np
 # Device configuration
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-# VAE model
+class BEC(torch.autograd.Function):
+
+    @staticmethod
+    def forward(ctx, x, p=0.2):
+        x_tmp = torch.round(x * 256)
+        #x_tmp = x_tmp.int()
+        x_tmp = x_tmp.byte()
+
+        p_complement = 1-p
+
+        std = x
+
+        binomial_noise = np.random.binomial(1,p_complement,(std.size())).astype(np.uint8) * 1 + \
+        np.random.binomial(1,p_complement,(std.size())).astype(np.uint8) * 2 + \
+        np.random.binomial(1,p_complement,(std.size())).astype(np.uint8) * 4 + \
+        np.random.binomial(1,p_complement,(std.size())).astype(np.uint8) * 8 + \
+        np.random.binomial(1,p_complement,(std.size())).astype(np.uint8) * 16 + \
+        np.random.binomial(1,p_complement,(std.size())).astype(np.uint8) * 32 + \
+        np.random.binomial(1,p_complement,(std.size())).astype(np.uint8) * 64 + \
+        np.random.binomial(1,p_complement,(std.size())).astype(np.uint8) * 128
+
+        binomial_noise = torch.ByteTensor(binomial_noise).to(device)
+
+        x_tmp_filter = x_tmp & binomial_noise
+        x_tmp_filter = x_tmp.float()
+        
+        x_tmp_filter = x_tmp_filter + (255.0 - binomial_noise.float()) / 2.0
+        x_tmp_filter /= 255.0
+
+        return x_tmp_filter
+
+    @staticmethod
+    def backward(ctx, grad_output):
+        grad_input = grad_output.clone()
+        return grad_input
+
+
 class compression_module(nn.Module):
     def __init__(self,  input_channel=256, hidden_channel=128, noise=10, channel = 1,spatial = 0):
         super(compression_module, self).__init__()
@@ -66,6 +102,7 @@ class compression_module(nn.Module):
         if self.channel == 'a':
             x = awgn_noise(x,noise_factor)
         elif self.channel == 'e':
+            bec =  BEC.apply
             x = bec(x,p)
         elif self.channel == 'w':
             x = x
@@ -79,38 +116,8 @@ class compression_module(nn.Module):
 
         return x
         
-def bec(x,p=0.2):
-    x_tmp = x * 256
-    x_tmp = x_tmp.int()
-    x_tmp = x_tmp.byte()
-
-    p_complement = 1-p
-
-    std = x
-
-    binomial_noise = np.random.binomial(1,p_complement,(std.size())).astype(np.uint8) * 1 + \
-    np.random.binomial(1,p_complement,(std.size())).astype(np.uint8) * 2 + \
-    np.random.binomial(1,p_complement,(std.size())).astype(np.uint8) * 4 + \
-    np.random.binomial(1,p_complement,(std.size())).astype(np.uint8) * 8 + \
-    np.random.binomial(1,p_complement,(std.size())).astype(np.uint8) * 16 + \
-    np.random.binomial(1,p_complement,(std.size())).astype(np.uint8) * 32 + \
-    np.random.binomial(1,p_complement,(std.size())).astype(np.uint8) * 64 + \
-    np.random.binomial(1,p_complement,(std.size())).astype(np.uint8) * 128
-
-    binomial_noise = torch.ByteTensor(binomial_noise).to(device)
-
-    x_tmp_filter = x_tmp & binomial_noise
-    x_tmp_filter = x_tmp.float()
-    
-    x_tmp_filter = x_tmp_filter + (255.0 - binomial_noise.float()) / 2.0
-    x_tmp_filter /= 255.0
-
-    return x_tmp_filter
 
 def awgn_noise(x, noise_factor):
     return x + torch.randn_like(x) * noise_factor
 
-      
-if __name__=='__main__':
-    train()
     
