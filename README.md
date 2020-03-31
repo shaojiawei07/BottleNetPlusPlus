@@ -52,10 +52,10 @@ python BottleNet++_VGG16.py -in_dim 512 -hid_dim 8 -div_position 13 -channel e -
 
 #### 64x bandwidth reduction
 ```
-python BottleNet++ResNet50.py -in_dim 2048 -hid_dim 32 -div_position 5 -sub_div_position 2 -channel a -noise 0.1
+python BottleNet++_ResNet50.py -in_dim 2048 -hid_dim 32 -div_position 5 -sub_div_position 2 -channel a -noise 0.1
 ```
 ```
-python BottleNet++VGG16.py -in_dim 512 -hid_dim 8 -div_position 12 -channel a -noise 0.1
+python BottleNet++_VGG16.py -in_dim 512 -hid_dim 8 -div_position 12 -channel a -noise 0.1
 ```
 
 ## Citation
