@@ -44,7 +44,7 @@ class BEC(torch.autograd.Function):
     @staticmethod
     def backward(ctx, grad_output):
         grad_input = grad_output.clone()
-        return grad_input
+        return grad_input, None
 
 
 class compression_module(nn.Module):
