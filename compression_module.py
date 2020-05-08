@@ -34,7 +34,7 @@ class BEC(torch.autograd.Function):
         binomial_noise = torch.ByteTensor(binomial_noise).to(device)
 
         x_tmp_filter = x_tmp & binomial_noise
-        x_tmp_filter = x_tmp.float()
+        x_tmp_filter = x_tmp_filter.float()
         
         x_tmp_filter = x_tmp_filter + (255.0 - binomial_noise.float()) / 2.0
         x_tmp_filter /= 255.0
@@ -112,7 +112,7 @@ class compression_module(nn.Module):
         if self.spatial == 1:
             x = F.relu(self.batchnorm2(self.conv2(x)))
         else:
-        	x = F.relu(self.batchnorm2(self.conv2(x)))
+        	x = F.relu(self.batchnorm2(self.conv4(x)))
 
         return x
         
