@@ -61,10 +61,13 @@ python BottleNet++_VGG16.py -in_dim 512 -hid_dim 8 -div_position 12 -channel a -
 ## Citation
 
 ```
-@article{shao2019bottlenet++,
-  title={BottleNet++: An End-to-End Approach for Feature Compression in Device-Edge Co-Inference Systems},
+@INPROCEEDINGS{9145068,
   author={Shao, Jiawei and Zhang, Jun},
-  journal={arXiv preprint arXiv:1910.14315},
-  year={2019}
-}
+  booktitle={2020 IEEE International Conference on Communications Workshops (ICC Workshops)}, 
+  title={BottleNet++: An End-to-End Approach for Feature Compression in Device-Edge Co-Inference Systems}, 
+  year={2020},
+  volume={},
+  number={},
+  pages={1-6},
+  doi={10.1109/ICCWorkshops49005.2020.9145068}}
 ```
