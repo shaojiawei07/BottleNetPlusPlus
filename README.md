@@ -39,7 +39,7 @@ CIFAR-100
 
 `-phase` refers to different training phases illustrated in paper. But for convenient, we provide the pre-train models and skip the first phase.
 
-### Main Experiment Result
+### Experiment Results
 
 #### 256x bit compression ratio
 
